@@ -1,5 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Persona } from '../persona.model';
+import { LoggingService } from '../LoggingService.service';
+import { PersonasService } from '../personasService.service';
 
 @Component({
   selector: 'app-form',
@@ -7,19 +9,27 @@ import { Persona } from '../persona.model';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent {
+  
+  //@Output() personaCreada = new EventEmitter<Persona>();
+  @ViewChild('apellidoInp', {static: false}) apellidoInp: ElementRef;
+  //nombreInp:string;
+  //apellidoInp:string;
 
-  @Output() personaCreada = new EventEmitter<Persona>();
-  nombreInp:string;
-  apellidoInp:string;
+  constructor(private logginService:LoggingService,
+        private personaService : PersonasService) { }
 
-  constructor() { }
+  onAddPersona(nombreInp:HTMLInputElement){
+    let persona1 = new Persona (nombreInp.value, this.apellidoInp.nativeElement.value);
+    this.logginService.enviarMensajeConsola(`Nombre: ${persona1.nombre} Apellido: ${persona1.apellido}`);
 
-  onAddPersona(){
-    let persona1 = new Persona (this.nombreInp, this.apellidoInp);
     //Metodo para enviar información a otro componente
-    this.personaCreada.emit(persona1);
-    this.nombreInp = "";
-    this.apellidoInp = "";
+    //this.personaCreada.emit(persona1);
+    
+    //this.nombreInp = "";
+    //this.apellidoInp = "";
+
+    // Formulario enviando el contenido con el servicio inyectado en el constructor.
+    this.personaService.addPersona(persona1);
   }
 
 }
