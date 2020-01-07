@@ -1,0 +1,13 @@
+    <form action="" class="item">
+        <input type="text" name="nombre" id="nombre"
+        placeholder="Nombre" class="form-control"
+        [(ngModel)] = "nombreInp"
+        >
+        <input type="text" name="apellido" id="apellido"
+            placeholder="Apellido" class="form-control"
+            [(ngModel)] = "apellidoInp">
+
+        <button type="submit" class="btn btn-success"
+          (click)="onAddPersona(nombreInp)">+</button>
+  
+      </form>

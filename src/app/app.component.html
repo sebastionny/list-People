@@ -1,28 +1,5 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 mt-5">
-      <h3>{{title}}</h3>
-    </div>
-  </div>
-
-  <hr>
-  <div class="row">
-    <!-- Metodo con un evento emit.
-      
-      <app-form
-      (personaCreada) = "onAddPersona($event)"
-    ></app-form> -->
-
-    <app-form></app-form>
-    
-    <hr>
-    
-    <ul>
-      <app-persona *ngFor="let personaPC of personas; let indexPC = index"
-        [persona] = "personaPC"
-        [index] = "indexPC"
-      ></app-persona>
-    </ul>
-   
-  </div>
+<div class="box" id="heading">
+        <h1>{{title}}</h1>
 </div>
+
+<app-personas></app-personas>

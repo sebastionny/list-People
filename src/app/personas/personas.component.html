@@ -1,0 +1,17 @@
+<div class="box">
+    <!-- Metodo con un evento emit.
+      
+      <app-form
+      (personaCreada) = "onAddPersona($event)"
+    ></app-form> -->
+
+    <app-persona *ngFor="let personaPC of personas; let indexPC = index"
+        [persona] = "personaPC"
+        [index] = "indexPC"
+      ></app-persona>    
+</div>
+
+<div class="box">
+  <app-form></app-form>
+</div> 
+    
