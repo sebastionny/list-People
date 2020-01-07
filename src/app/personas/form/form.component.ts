@@ -2,32 +2,48 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '
 import { Persona } from '../../persona.model';
 import { LoggingService } from '../../LoggingService.service';
 import { PersonasService } from '../../personasService.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class FormComponent {
+export class FormComponent implements OnInit{
   
   //@Output() personaCreada = new EventEmitter<Persona>();
   //@ViewChild('apellidoInp', {static: false}) apellidoInp: ElementRef;
   
   nombreInp:string;
   apellidoInp:string;
-
+  indice:number;
+  
   constructor(private logginService:LoggingService,
-        private personaService : PersonasService) { 
-          this.personaService.saludar.subscribe(
-            (index: number) => alert(`El indice es: ${index}`)
-          )
-        }
+    private personaService : PersonasService,
+    private router : Router,
+    private route : ActivatedRoute) { 
+      this.personaService.saludar.subscribe(
+        (index: number) => alert(`El indice es: ${index}`)
+        )
+      }
+      
+  ngOnInit(): void {
+    this.indice = this.route.snapshot.params['id'];
+    if(this.indice){
+      let persona: Persona = this.personaService.encontrarPersona(this.indice);
+      this.nombreInp = persona.nombre;
+      this.apellidoInp = persona.apellido;
+    }
+  }
 
-  onAddPersona(nombreInp:HTMLInputElement){
+  onGuardarPersona(nombreInp:HTMLInputElement){
     let persona1 = new Persona (this.nombreInp, this.apellidoInp);
-    this.personaService.addPersona(persona1);
-
-
+    if(this.indice){
+      this.personaService.modificarPersona(this.indice, persona1)
+    } else{
+      this.personaService.addPersona(persona1);
+    }
+    this.router.navigate(['personas']);
     
     //this.logginService.enviarMensajeConsola(`Nombre: ${persona1.nombre} Apellido: ${persona1.apellido}`);
 

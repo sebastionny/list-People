@@ -19,5 +19,16 @@ export class PersonasService{
         this.personas.push(persona1);
     }
 
+    encontrarPersona(i:number){
+        let persona : Persona = this.personas[i];
+        return persona;
+    }
+
+    modificarPersona(i:number, persona:Persona){
+        let personaFound : Persona = this.personas[i];
+        personaFound.nombre = persona.nombre;
+        personaFound.apellido = persona.apellido;
+    }
+
 
 }

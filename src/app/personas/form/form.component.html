@@ -1,4 +1,5 @@
-    <form action="" class="item">
+<div class="box">
+    <form  action="" class="item" #f="ngForm" (ngSubmit)="f.form.valid && onGuardarPersona(nombreInp)">
         <input type="text" name="nombre" id="nombre"
         placeholder="Nombre" class="form-control"
         [(ngModel)] = "nombreInp"
@@ -7,7 +8,7 @@
             placeholder="Apellido" class="form-control"
             [(ngModel)] = "apellidoInp">
 
-        <button type="submit" class="btn btn-success"
-          (click)="onAddPersona(nombreInp)">+</button>
+        <button type="submit" style="cursor: pointer" class="btn btn-success">+</button>
   
       </form>
+</div>
