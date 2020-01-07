@@ -36,6 +36,13 @@ export class FormComponent implements OnInit{
     }
   }
 
+  eliminarPersona(){
+    if(this.indice != null){
+      this.personaService.eliminarPersona(this.indice);
+    }
+    this.router.navigate(['personas']);
+  }
+
   onGuardarPersona(nombreInp:HTMLInputElement){
     let persona1 = new Persona (this.nombreInp, this.apellidoInp);
     if(this.indice){
