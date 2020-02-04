@@ -40,10 +40,18 @@ export class PersonasService{
         let personaFound : Persona = this.personas[i];
         personaFound.nombre = persona.nombre;
         personaFound.apellido = persona.apellido;
+        this.data.modificarPersona(i,persona);
     }
 
     eliminarPersona(i:number){
         this.personas.splice(i,1);
+        this.data.eliminarPersona(i);
+        this.modificarPersonas();
+    }
+
+    modificarPersonas(){
+        if(this.personas != null)
+            this.data.guardarPersonas(this.personas);
     }
 
 
